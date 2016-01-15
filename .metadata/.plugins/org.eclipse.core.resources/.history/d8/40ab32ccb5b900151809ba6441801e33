@@ -1,0 +1,69 @@
+
+
+public class cFileOO {
+	private final int LIMIT_FORMES = 10;
+	private cNoeuds M_Debut  = null;
+	private int M_Limit = 0;
+	
+	public cFileOO(){
+		M_Debut = null;
+		M_Limit = LIMIT_FORMES;
+		
+	}
+	public void addForme( cFormes _formes){
+		cNoeuds searchNoeud = null;
+		cNoeuds addNoeud = new cNoeuds(_formes);
+		int nbNextNoeuds = 0;
+		
+		if( M_Debut == null ){
+			M_Debut = addNoeud;
+		}else{
+			nbNextNoeuds = countNoeuds();
+			if( nbNextNoeuds >= M_Limit ){
+				nbNextNoeuds--;
+				removeForme();
+			}
+			searchNoeud = M_Debut;
+			for( int pos = 0; pos < nbNextNoeuds-1;pos++ ){
+				searchNoeud = searchNoeud.getSuivant();
+			}
+			searchNoeud.setSuivant(addNoeud);
+		}
+	}
+	private int countNoeuds(){
+		int nbNoeuds = 0;
+		if( M_Debut != null){
+			cNoeuds tempoNoeuds = M_Debut;
+			nbNoeuds++;
+			while (tempoNoeuds.getSuivant() != null) {
+				nbNoeuds++;
+				tempoNoeuds = tempoNoeuds.getSuivant();
+			}
+		}
+		
+		
+		return nbNoeuds;
+	}
+	private void removeForme(){
+		cNoeuds remNoeuds = M_Debut;
+		M_Debut = M_Debut.getSuivant();
+		remNoeuds.setSuivant(null);
+		System.gc();
+		
+	}
+	public cFormes getDebut(){
+		return M_Debut.getForme();
+	}
+	public cFormes getNoeudAt( int _pos ){
+		cNoeuds searchNoeud = M_Debut;
+		int nbNoeuds = countNoeuds()-1;
+		if(_pos > nbNoeuds){
+			_pos = nbNoeuds;
+		}
+		for( int pos = 0; pos < _pos;pos++ ){
+			searchNoeud = searchNoeud.getSuivant();
+		}
+		
+		return searchNoeud.getForme();
+	}
+}

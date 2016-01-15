@@ -1,0 +1,11 @@
+public class cFileOO {
+	private final int LIMIT_FORMES = 10;
+	private cNoeuds M_Debut  = null;
+	private int M_Limit = 0;
+	
+	public cFileOO(){
+		M_Debut = null;
+		M_Limit = LIMIT_FORMES;
+		
+	}
+}
