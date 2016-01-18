@@ -1,28 +1,47 @@
+/**
+ * Cette classe reprÃ©sente l'application dans son ensemble. 
+ * @author Kevin Raymond-Lamoureux
+ * @date 2016/01/12
+ * ***********************************
+ * Modifier le 17 Janvier
+ */
 
-
-public class cFileOO {
+public class cFormeQueue {
 	private final int LIMIT_FORMES = 10;
 	private cNoeuds M_Debut  = null;
 	private int M_Limit = 0;
 	
-	public cFileOO(){
-		//Constructeur de la file FiFo
+	/**
+	* Constructeur
+	* 
+	*/
+	public cFormeQueue(){
+
 		M_Debut = null;
 		M_Limit = LIMIT_FORMES;
 		
 	}
+	/**
+	 * Ascesseur
+	 * @param _limit
+	 */
 	public void setLimit(int _limit){
-	//Ascesseur qui permet de modifier la limite de la file
 		if(_limit > 0){
 			M_Limit = _limit;
 		}
 	}
+	/**
+	 * Ascesseur
+	 */
 	public int getLimit(){
-	//Ascesseur qui permet de recevoir la nombre maxime de noeuds dans la file
+
 		return M_Limit;
 	}
+	/**
+	 * Procedure permettant l'ajout d'un noeud qui contiendra la classe cForme
+	 * @param _formes
+	 */
 	public void addForme( cFormes _formes){
-	//Procedure permettant l'ajout d'un noeud qui contiendra la classe cForme
 		cNoeuds searchNoeud = null;
 		cNoeuds addNoeud = new cNoeuds(_formes);
 		int nbNextNoeuds = 0;
@@ -45,8 +64,10 @@ public class cFileOO {
 			searchNoeud.setSuivant(addNoeud);
 		}
 	}
+	/**
+	 * Fonction retournant le nombre de noeuds existant dans la file
+	 */
 	private int countNoeuds(){
-	//Fonction retournant le nombre de noeuds existant dans la file
 		int nbNoeuds = 0;
 		if( M_Debut != null){
 			cNoeuds tempoNoeuds = M_Debut;
@@ -60,20 +81,29 @@ public class cFileOO {
 		
 		return nbNoeuds;
 	}
+	/**
+	 * Procédure qui permet d'enlever le premier noeud
+	 */
 	private void removeForme(){
-	//Procédure qui permet d'enlever le premier noeud
 		cNoeuds remNoeuds = M_Debut;
 		M_Debut = M_Debut.getSuivant();
-		remNoeuds.setSuivant(null);
+		remNoeuds= null;
 		System.gc();
 		
 	}
+	/**
+	 * Obtenir la forme du premier noeud
+	 * @param 
+	 */
 	public cFormes getDebut(){
-	//Obtenir la forme du premier noeud
 		return M_Debut.getForme();
 	}
+	/**
+	 * Obtenir la forme d'un noeud dans la file selon la position
+	 * @param _pos 
+	 */
 	public cFormes getNoeudAt( int _pos ){
-	//Obtenir la forme d'un noeud dans la file selon la position
+
 		cNoeuds searchNoeud = M_Debut;
 		int nbNoeuds = countNoeuds()-1;
 		if(_pos > nbNoeuds){
